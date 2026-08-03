@@ -1,26 +1,31 @@
-interface ContactLink {
+import contact from "../../content/contact.json";
+import type { ContactInfo } from "../../content/types";
+
+const info = contact as ContactInfo;
+
+interface ContactRow {
   label: string;
   value: string;
   href?: string;
 }
 
-const CONTACT_LINKS: ContactLink[] = [
-  { label: "EMAIL", value: "[ email address ]" },
-  { label: "PHONE", value: "[ phone number ]" },
+const CONTACT_ROWS: ContactRow[] = [
+  { label: "EMAIL", value: info.email || "[ email address ]" },
+  { label: "PHONE", value: info.phone || "[ phone number ]" },
   {
     label: "INSTAGRAM",
-    value: "@gyesswhat",
-    href: "https://instagram.com/gyesswhat",
+    value: `@${info.instagram}`,
+    href: `https://instagram.com/${info.instagram}`,
   },
   {
     label: "BLOG",
-    value: "log.gyesswhat.dev",
-    href: "https://log.gyesswhat.dev",
+    value: info.blog.replace(/^https?:\/\//, ""),
+    href: info.blog,
   },
   {
     label: "GITHUB",
-    value: "github.com/gyesswhat",
-    href: "https://github.com/gyesswhat",
+    value: `github.com/${info.github}`,
+    href: `https://github.com/${info.github}`,
   },
 ];
 
@@ -48,7 +53,7 @@ export default function ContactTab() {
         className="absolute left-1/2 flex w-full max-w-xs -translate-x-1/2 flex-col gap-3 bg-[var(--bg)] px-4 py-4 text-left text-sm"
         style={{ top: `calc(50% + ${HALF_GAP}px)` }}
       >
-        {CONTACT_LINKS.map((row) => (
+        {CONTACT_ROWS.map((row) => (
           <div
             key={row.label}
             className="flex items-baseline justify-between gap-6 border-b border-[var(--gray-100)] pb-2"

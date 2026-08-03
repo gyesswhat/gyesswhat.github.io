@@ -1,0 +1,38 @@
+[
+  {
+    "slug": "logue",
+    "title": "Logue",
+    "tagline": "마케팅·CRM 실무자를 위한 KPI 리포팅 자동화",
+    "category": "engineering",
+    "period": { "start": "2025-03", "end": null },
+    "role": ["Backend Lead", "AI Lead"],
+    "stack": ["Spring Boot", "PostgreSQL", "Redis", "FastAPI"],
+    "links": {
+      "live": "https://asklogue.co",
+      "github": "https://github.com/"
+    },
+    "order": 1
+  },
+  {
+    "slug": "project-alpha",
+    "title": "[ Project Alpha ]",
+    "tagline": "[ placeholder tagline ]",
+    "category": "research",
+    "period": { "start": "2024-09", "end": "2025-01" },
+    "role": ["Researcher"],
+    "stack": ["Python", "PyTorch"],
+    "links": {},
+    "order": 2
+  },
+  {
+    "slug": "project-beta",
+    "title": "[ Project Beta ]",
+    "tagline": "[ placeholder tagline ]",
+    "category": "engineering",
+    "period": { "start": "2023-11", "end": "2024-04" },
+    "role": ["Frontend"],
+    "stack": ["React", "TypeScript"],
+    "links": { "github": "https://github.com/" },
+    "order": 3
+  }
+]

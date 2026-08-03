@@ -1,15 +1,8 @@
-interface TimelineEntry {
-  period: string;
-  role: string;
-  org: string;
-}
+import experience from "../../content/experience.json";
+import type { ExperienceEntry } from "../../content/types";
+import { formatPeriod } from "../../lib/format";
 
-const timeline: TimelineEntry[] = [
-  { period: "2022", role: "[ Role ]", org: "[ Organization ]" },
-  { period: "2023", role: "[ Role ]", org: "[ Organization ]" },
-  { period: "2024", role: "[ Role ]", org: "[ Organization ]" },
-  { period: "2025", role: "[ Role ]", org: "[ Organization ]" },
-];
+const timeline = experience as ExperienceEntry[];
 
 export default function ExperienceTab() {
   return (
@@ -23,11 +16,11 @@ export default function ExperienceTab() {
 
         {timeline.map((entry) => (
           <div
-            key={entry.period}
+            key={`${entry.org}-${entry.start}`}
             className="relative z-10 flex flex-col items-center gap-2 bg-[var(--bg)] px-3"
           >
             <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">
-              {entry.period}
+              {formatPeriod(entry)}
             </span>
             <span className="h-2 w-2 rounded-full bg-[var(--fg)]" />
             <div className="flex flex-col items-center gap-0.5 text-center">

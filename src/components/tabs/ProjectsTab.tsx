@@ -1,13 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { projects, type ProjectItem } from "../../data/projects";
+import projectsJson from "../../content/projects.json";
+import type { ProjectItem } from "../../content/types";
+import { formatPeriod, splitParagraphs } from "../../lib/format";
+
+const projects = projectsJson as ProjectItem[];
+
+const projectBodies = import.meta.glob<string>("../../content/projects/*.md", {
+  eager: true,
+  query: "?raw",
+  import: "default",
+});
+
+function getProjectBody(slug: string) {
+  const entry = Object.entries(projectBodies).find(([path]) =>
+    path.endsWith(`/${slug}.md`)
+  );
+  return entry ? splitParagraphs(entry[1]) : [];
+}
 
 const FILTERS = ["all", "engineering", "research"] as const;
 type Filter = (typeof FILTERS)[number];
-
-function formatPeriod(period: ProjectItem["period"]) {
-  return `${period.start} — ${period.end ?? "Present"}`;
-}
 
 export default function ProjectsTab() {
   const [filter, setFilter] = useState<Filter>("all");
@@ -164,14 +177,9 @@ export default function ProjectsTab() {
 
               {/* body — separate flowing markdown area, distinct from the metadata block above */}
               <div className="flex flex-col gap-4 pt-6 text-sm leading-relaxed text-[var(--gray-600)]">
-                <p>
-                  [ markdown write-up goes here — background, problem, approach,
-                  outcome ]
-                </p>
-                <p>
-                  [ renders as one continuous piece, kept separate from the
-                  structured metadata above ]
-                </p>
+                {getProjectBody(selected.slug).map((paragraph, i) => (
+                  <p key={i}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
           </motion.div>
