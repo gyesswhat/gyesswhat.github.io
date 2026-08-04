@@ -6,9 +6,12 @@ export default function AboutTab() {
   return (
     <div className="flex h-full w-full items-center justify-center px-6">
       <div className="flex max-w-md flex-col items-center gap-5 text-center">
-        {/* no real photo asset yet — swap for <img src={about.photo}> once one exists */}
-        <div className="flex h-28 w-28 items-center justify-center rounded-full border border-[var(--gray-200)] bg-[var(--bg)] text-[10px] tracking-[0.2em] text-[var(--gray-300)]">
-          PHOTO
+        <div className="group relative h-28 w-28 overflow-hidden rounded-full border border-[var(--gray-200)]">
+          <img
+            src={about.photo}
+            alt={about.oneLiner}
+            className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0"
+          />
         </div>
 
         <p className="bg-[var(--bg)] px-3 text-lg font-medium text-[var(--fg)]">
