@@ -43,7 +43,7 @@ export default function App() {
   }, [tab, goTo]);
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-[var(--bg)]">
+    <div className="relative h-dvh w-screen overflow-hidden bg-[var(--bg)]">
       <AsciiRabbit stopped={tab === LAST_INDEX} />
 
       <AnimatePresence initial={false} custom={direction.current}>

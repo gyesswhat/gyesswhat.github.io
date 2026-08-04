@@ -7,15 +7,15 @@ interface TabNavProps {
 
 export default function TabNav({ current, onSelect }: TabNavProps) {
   return (
-    <nav className="pointer-events-auto absolute left-1/2 top-6 z-10 flex -translate-x-1/2 items-center gap-6 text-xs tracking-[0.15em]">
+    <nav className="pointer-events-auto absolute left-1/2 top-4 z-10 flex w-full max-w-full -translate-x-1/2 flex-wrap items-center justify-center gap-x-3 gap-y-2 px-4 text-[10px] tracking-[0.1em] sm:top-6 sm:gap-x-6 sm:text-xs sm:tracking-[0.15em]">
       <div className="flex items-center gap-2 text-[var(--fg)]">
         <img src="/logo.svg" alt="" className="h-4 w-4" />
         <span>Gyeore Kim</span>
       </div>
 
-      <span className="text-[var(--gray-200)]">/</span>
+      <span className="hidden text-[var(--gray-200)] sm:inline">/</span>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 sm:gap-4">
         {TABS.slice(1).map((label, i) => {
           const index = i + 1;
           const active = current === index;

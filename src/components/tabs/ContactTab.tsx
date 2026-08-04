@@ -33,17 +33,19 @@ const CONTACT_ROWS: ContactRow[] = [
   },
 ];
 
-// half of the fixed gap reserved around dead-center, where the rabbit comes to rest —
+// half of the gap reserved around dead-center, where the rabbit comes to rest —
 // anchoring both blocks by distance-from-center (not flex auto-centering) keeps that
-// gap exactly on the viewport's true middle no matter how tall either block renders
-const HALF_GAP = 80;
+// gap exactly on the viewport's true middle no matter how tall either block renders.
+// clamp() shrinks the gap on short mobile viewports instead of a fixed 80px eating
+// into the space either block has to render in.
+const HALF_GAP = "clamp(48px, 10vh, 80px)";
 
 export default function ContactTab() {
   return (
     <div className="relative h-full w-full px-6 text-center">
       <div
         className="absolute left-1/2 flex w-full max-w-md -translate-x-1/2 flex-col items-center gap-3"
-        style={{ bottom: `calc(50% + ${HALF_GAP}px)` }}
+        style={{ bottom: `calc(50% + ${HALF_GAP})` }}
       >
         <p className="bg-[var(--bg)] px-2 text-xs tracking-[0.15em] text-[var(--gray-400)]">
           THE CHASE ENDS HERE
@@ -55,7 +57,7 @@ export default function ContactTab() {
 
       <div
         className="absolute left-1/2 flex w-full max-w-xs -translate-x-1/2 flex-col gap-3 bg-[var(--bg)] px-4 py-4 text-left text-sm"
-        style={{ top: `calc(50% + ${HALF_GAP}px)` }}
+        style={{ top: `calc(50% + ${HALF_GAP})` }}
       >
         {CONTACT_ROWS.map((row) => (
           <div

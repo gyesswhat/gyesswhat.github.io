@@ -24,7 +24,7 @@ export default function ExperienceTab() {
     <div className="flex h-full w-full items-center justify-center px-6">
       <motion.div
         layout
-        className="flex w-full max-w-3xl flex-col items-center gap-12"
+        className="flex w-full max-w-3xl flex-col items-center gap-8 sm:gap-12"
       >
         <p className="bg-[var(--bg)] px-2 text-xs tracking-[0.15em] text-[var(--gray-400)]">
           WHERE I'VE BEEN
@@ -41,7 +41,7 @@ export default function ExperienceTab() {
                 key={year}
                 type="button"
                 onClick={() => setSelectedYear(isSelected ? null : year)}
-                className="relative flex flex-col items-center gap-2 bg-[var(--bg)] px-3"
+                className="relative flex flex-col items-center gap-2 bg-[var(--bg)] px-1.5 sm:px-3"
               >
                 <span
                   className="h-2 w-2 rounded-full transition-colors duration-200"
