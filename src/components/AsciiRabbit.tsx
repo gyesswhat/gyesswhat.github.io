@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import rabbitFrames from "../animation/rabbitFrames";
 
-const RUNNER_WIDTH = 200; // px — target on-screen width of the ascii art box
+const RUNNER_WIDTH = 150; // px — target on-screen width of the ascii art box
 // Rendered at a normal, stable font size and then transform-scaled down to fit
 // RUNNER_WIDTH, rather than computing a sub-pixel font size directly — glyph
 // advance-widths round to whole device pixels, so a ~2px font renders a
