@@ -1,9 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import rabbitFrames from "../animation/rabbitFrames";
-import { fitTextToContainer } from "../animation/fitTextToContainer";
 
-const RUNNER_WIDTH = 200; // px — size of the ascii art box (small, so it reads as a dot-pattern)
-const CHAR_RATIO = 0.66;
+const RUNNER_WIDTH = 200; // px — target on-screen width of the ascii art box
+// Rendered at a normal, stable font size and then transform-scaled down to fit
+// RUNNER_WIDTH, rather than computing a sub-pixel font size directly — glyph
+// advance-widths round to whole device pixels, so a ~2px font renders a
+// different width per character depending on devicePixelRatio, which read as
+// the rabbit stretching/squishing differently across screens/zoom in Chrome.
+// A uniform scale() transform applied after layout doesn't have that problem.
+const BASE_FONT_SIZE = 8;
 const WALK_FPS = 14;
 const CROSS_DURATION_MS = 5000; // time to cross the viewport left -> right
 const LAST_FRAME = rabbitFrames.length - 1;
@@ -14,13 +19,16 @@ interface AsciiRabbitProps {
 }
 
 export default function AsciiRabbit({ stopped = false }: AsciiRabbitProps) {
+  const preRef = useRef<HTMLPreElement>(null);
   const [frameIndex, setFrameIndex] = useState(0);
-  const [fontSize, setFontSize] = useState(0);
+  const [size, setSize] = useState<{ scale: number; height: number } | null>(null);
   const [x, setX] = useState(-RUNNER_WIDTH);
 
   useEffect(() => {
-    const size = fitTextToContainer(rabbitFrames[0], "monospace", RUNNER_WIDTH);
-    setFontSize(size * CHAR_RATIO);
+    const rect = preRef.current?.getBoundingClientRect();
+    if (!rect || rect.width === 0) return;
+    const scale = RUNNER_WIDTH / rect.width;
+    setSize({ scale, height: rect.height * scale });
   }, []);
 
   // walk-cycle: loops forward through the frame set (0..7, 0..7, ...) while running
@@ -70,27 +78,39 @@ export default function AsciiRabbit({ stopped = false }: AsciiRabbitProps) {
   }, [stopped]);
 
   return (
-    <pre
+    <div
       aria-hidden="true"
       style={{
         position: "absolute",
         top: "50%",
         left: 0,
         width: RUNNER_WIDTH,
-        transform: `translate(${x}px, -50%) scaleX(1.06)`,
+        height: size?.height || 0,
+        transform: `translate(${x}px, -50%)`,
         transition: stopped ? "transform 500ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
-        fontSize: fontSize || 1,
-        lineHeight: `${fontSize || 1}px`,
-        fontFamily: "monospace",
-        color: "var(--gray-800)",
-        margin: 0,
-        opacity: fontSize ? 1 : 0,
+        opacity: size ? 1 : 0,
         pointerEvents: "none",
-        whiteSpace: "pre",
-        userSelect: "none",
       }}
     >
-      {rabbitFrames[frameIndex]}
-    </pre>
+      <pre
+        ref={preRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          transformOrigin: "top left",
+          transform: size ? `scale(${size.scale * 1.06}, ${size.scale})` : undefined,
+          fontSize: BASE_FONT_SIZE,
+          lineHeight: `${BASE_FONT_SIZE}px`,
+          fontFamily: "monospace",
+          color: "var(--gray-800)",
+          margin: 0,
+          whiteSpace: "pre",
+          userSelect: "none",
+        }}
+      >
+        {rabbitFrames[frameIndex]}
+      </pre>
+    </div>
   );
 }
