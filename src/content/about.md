@@ -1,1 +1,1 @@
-[ a short paragraph introducing background, focus, and interests goes here ]
+Hello there — I'm a CS student at Ewha. I got into coding because turning ideas into actual, working code just feels good. I've mostly focused on web backend, and I'm currently at SWEETS Lab. Outside of that, I'm into sci-fi movies, writing poetry and fiction, and reading comics.
