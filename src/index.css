@@ -36,7 +36,16 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: "JetBrains Mono", "SF Mono", "Menlo", "Consolas", monospace;
+  font-family: "Pretendard", sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
 }
