@@ -82,6 +82,7 @@ placeholder instead.
 
 ## Notes
 
-- Markdown bodies (About, Projects) are rendered as plain paragraphs split on
-  blank lines — no markdown syntax (bold, links, headings, etc.) is parsed yet.
-  Drop in a renderer like `react-markdown` later if you need real formatting.
+- Markdown bodies (About, Projects) are rendered with `react-markdown`
+  (`src/components/Markdown.tsx`) — bold, links, headings, lists, etc. all
+  work. Styling is mapped to the site's existing Tailwind classes rather than
+  a `prose` plugin, to match the minimal aesthetic.

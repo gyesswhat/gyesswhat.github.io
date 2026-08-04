@@ -1,5 +1,6 @@
 import about from "../../content/about.json";
 import bioMd from "../../content/about.md?raw";
+import Markdown from "../Markdown";
 
 export default function AboutTab() {
   return (
@@ -14,9 +15,9 @@ export default function AboutTab() {
           {about.oneLiner}
         </p>
 
-        <p className="bg-[var(--bg)] px-3 text-sm leading-relaxed text-[var(--gray-500)]">
+        <Markdown className="flex flex-col gap-3 bg-[var(--bg)] px-3 text-sm leading-relaxed text-[var(--gray-500)]">
           {bioMd.trim()}
-        </p>
+        </Markdown>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import projectsJson from "../../content/projects.json";
 import type { ProjectItem } from "../../content/types";
-import { formatPeriod, splitParagraphs } from "../../lib/format";
+import { formatPeriod } from "../../lib/format";
+import Markdown from "../Markdown";
 
 const projects = projectsJson as ProjectItem[];
 
@@ -16,7 +17,7 @@ function getProjectBody(slug: string) {
   const entry = Object.entries(projectBodies).find(([path]) =>
     path.endsWith(`/${slug}.md`)
   );
-  return entry ? splitParagraphs(entry[1]) : [];
+  return entry ? entry[1].trim() : "";
 }
 
 const FILTERS = ["all", "engineering", "research"] as const;
@@ -176,11 +177,9 @@ export default function ProjectsTab() {
               </div>
 
               {/* body — separate flowing markdown area, distinct from the metadata block above */}
-              <div className="flex flex-col gap-4 pt-6 text-sm leading-relaxed text-[var(--gray-600)]">
-                {getProjectBody(selected.slug).map((paragraph, i) => (
-                  <p key={i}>{paragraph}</p>
-                ))}
-              </div>
+              <Markdown className="flex flex-col gap-4 pt-6 text-sm leading-relaxed text-[var(--gray-600)]">
+                {getProjectBody(selected.slug)}
+              </Markdown>
             </motion.div>
           </motion.div>
         )}
