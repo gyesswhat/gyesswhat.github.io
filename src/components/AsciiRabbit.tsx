@@ -9,6 +9,7 @@ const RUNNER_WIDTH = 200; // px — target on-screen width of the ascii art box
 // the rabbit stretching/squishing differently across screens/zoom in Chrome.
 // A uniform scale() transform applied after layout doesn't have that problem.
 const BASE_FONT_SIZE = 8;
+const HORIZONTAL_STRETCH = 1.15; // widens the rabbit slightly relative to its height
 const WALK_FPS = 14;
 const CROSS_DURATION_MS = 5000; // time to cross the viewport left -> right
 const LAST_FRAME = rabbitFrames.length - 1;
@@ -99,7 +100,9 @@ export default function AsciiRabbit({ stopped = false }: AsciiRabbitProps) {
           top: 0,
           left: 0,
           transformOrigin: "top left",
-          transform: size ? `scale(${size.scale * 1.06}, ${size.scale})` : undefined,
+          transform: size
+            ? `scale(${size.scale * HORIZONTAL_STRETCH}, ${size.scale})`
+            : undefined,
           fontSize: BASE_FONT_SIZE,
           lineHeight: `${BASE_FONT_SIZE}px`,
           fontFamily: "monospace",
