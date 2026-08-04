@@ -1,38 +1,52 @@
 [
   {
-    "slug": "logue",
-    "title": "Logue",
-    "tagline": "마케팅·CRM 실무자를 위한 KPI 리포팅 자동화",
+    "slug": "glit",
+    "title": "Glit",
+    "tagline": "A web app for logging your career in 5 minutes a day.",
     "category": "engineering",
-    "period": { "start": "2025-03", "end": null },
-    "role": ["Backend Lead", "AI Lead"],
-    "stack": ["Spring Boot", "PostgreSQL", "Redis", "FastAPI"],
+    "period": { "start": "2026-03", "end": null },
+    "role": ["Backend Lead", "Dev Lead"],
+    "stack": ["Spring Boot", "FastAPI", "AWS"],
     "links": {
-      "live": "https://asklogue.co",
-      "github": "https://github.com/"
+      "live": "https://glit.today",
+      "github": "https://github.com/2026-KUSITMS-GLIT/2026-KUSITMS-GLIT-BACK"
     },
     "order": 1
   },
   {
-    "slug": "project-alpha",
-    "title": "[ Project Alpha ]",
-    "tagline": "[ placeholder tagline ]",
-    "category": "research",
-    "period": { "start": "2024-09", "end": "2025-01" },
-    "role": ["Researcher"],
-    "stack": ["Python", "PyTorch"],
-    "links": {},
+    "slug": "logue",
+    "title": "Logue",
+    "tagline": "An AI analytics web app that lets non-technical teams explore data in plain language.",
+    "category": "engineering",
+    "period": { "start": "2026-03", "end": null },
+    "role": ["Backend Lead"],
+    "stack": ["Spring Boot", "FastAPI", "AWS"],
+    "links": {
+      "live": "https://asklogue.co",
+      "github": "https://github.com/26-ewha-capstone-logue/logue"
+    },
     "order": 2
   },
   {
-    "slug": "project-beta",
-    "title": "[ Project Beta ]",
-    "tagline": "[ placeholder tagline ]",
+    "slug": "niedu",
+    "title": "NIEdu",
+    "tagline": "A quiz app that turns daily news into bite-sized current-affairs practice.",
     "category": "engineering",
-    "period": { "start": "2023-11", "end": "2024-04" },
-    "role": ["Frontend"],
-    "stack": ["React", "TypeScript"],
-    "links": { "github": "https://github.com/" },
+    "period": { "start": "2025-09", "end": "2026-01" },
+    "role": ["Backend Lead", "Dev Lead"],
+    "stack": ["Spring Boot", "FastAPI", "AWS"],
+    "links": { "github": "https://github.com/2025-UNIS-NIEDU/2025-NIEDU-BACK" },
     "order": 3
+  },
+  {
+    "slug": "unis-ewha-festival",
+    "title": "Ewha Festival Lucky Draw",
+    "tagline": "A lucky draw event site built for the 2025 Ewha university festival.",
+    "category": "engineering",
+    "period": { "start": "2025-05", "end": "2025-05" },
+    "role": ["Backend"],
+    "stack": ["Spring Boot", "AWS"],
+    "links": { "github": "https://github.com/2025-UNIS-EWHA-FESTIVAL/2025-UNIS-EWHA-FESTIVAL-BACK" },
+    "order": 4
   }
 ]
