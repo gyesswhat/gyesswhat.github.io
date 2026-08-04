@@ -46,7 +46,7 @@ export default function ContactTab() {
         style={{ bottom: `calc(50% + ${HALF_GAP}px)` }}
       >
         <p className="bg-[var(--bg)] px-2 text-xs tracking-[0.15em] text-[var(--gray-400)]">
-          YOU FINALLY FOUND THE RABBIT
+          THE CHASE ENDS HERE
         </p>
         <h1 className="bg-[var(--bg)] px-2 text-4xl font-semibold text-[var(--fg)] sm:text-5xl">
           Let's Talk.
