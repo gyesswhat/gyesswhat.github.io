@@ -27,14 +27,22 @@ for text updates.
 
 ### Experience — `src/content/experience.json`
 
-Array of entries:
+Object keyed by year (`"2022"`–`"2026"`, fixed 5-year range shown on the
+timeline). Each year maps to an array of entries:
 
 ```json
-{ "role": "Role", "org": "Organization", "start": "2025-01", "end": null }
+{
+  "2025": [
+    { "title": "Title", "description": "one-line description" }
+  ]
+}
 ```
 
-`end: null` renders as "Present." Array order = left-to-right order on the
-timeline.
+Clicking a year on the timeline expands a panel directly below the
+timeline listing that year's entries (click again, pick another year, or
+press Escape to close it). An empty array (or a missing year key) shows an
+empty state in the panel — the year still shows on the timeline, just
+dimmed.
 
 ### Projects — `src/content/projects.json` + `src/content/projects/<slug>.md`
 

@@ -1,6 +1,40 @@
-[
-  { "role": "[ Role ]", "org": "[ Organization ]", "start": "2022-01", "end": "2022-12" },
-  { "role": "[ Role ]", "org": "[ Organization ]", "start": "2023-01", "end": "2023-12" },
-  { "role": "[ Role ]", "org": "[ Organization ]", "start": "2024-01", "end": "2024-12" },
-  { "role": "[ Role ]", "org": "[ Organization ]", "start": "2025-01", "end": null }
-]
+{
+  "2022": [
+    {
+      "title": "Suwon Foreign Language High School",
+      "description": "Graduated from the English language track."
+    },
+    {
+      "title": "Ewha Womans University",
+      "description": "Entered Scranton College — Computer Science, with Digital Humanities and Philosophy."
+    }
+  ],
+  "2023": [
+    {
+      "title": "Ewha Computer Club (ECC), 48th",
+      "description": "Wrote my first Spring application and decided backend was the thing."
+    }
+  ],
+  "2024": [
+    {
+      "title": "Lund University, Sweden",
+      "description": "Spent the fall semester on exchange."
+    }
+  ],
+  "2025": [
+    {
+      "title": "UNIS, 6th — President, Backend Lead",
+      "description": "Ran Ewha's startup society for a year while leading its backend track."
+    }
+  ],
+  "2026": [
+    {
+      "title": "KUSITMS, 33rd",
+      "description": "Joined a national IT strategy society and shipped GLIT with the team."
+    },
+    {
+      "title": "SWEETS Lab @ Ewha",
+      "description": "Started as an undergraduate intern in software testing research."
+    }
+  ]
+}

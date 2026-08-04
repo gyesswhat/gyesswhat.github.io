@@ -4,12 +4,12 @@ export interface AboutContent {
   bio: string;
 }
 
-export interface ExperienceEntry {
-  role: string;
-  org: string;
-  start: string;
-  end: string | null;
+export interface ExperienceItem {
+  title: string;
+  description: string;
 }
+
+export type ExperienceByYear = Record<string, ExperienceItem[]>;
 
 export interface ContactInfo {
   email: string;
