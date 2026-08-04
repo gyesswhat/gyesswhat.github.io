@@ -10,7 +10,11 @@ interface ContactRow {
 }
 
 const CONTACT_ROWS: ContactRow[] = [
-  { label: "EMAIL", value: info.email || "[ email address ]" },
+  {
+    label: "EMAIL",
+    value: info.email || "[ email address ]",
+    href: info.email ? `mailto:${info.email}` : undefined,
+  },
   { label: "PHONE", value: info.phone || "[ phone number ]" },
   {
     label: "INSTAGRAM",
@@ -64,8 +68,10 @@ export default function ContactTab() {
             {row.href ? (
               <a
                 href={row.href}
-                target="_blank"
-                rel="noreferrer"
+                {...(!row.href.startsWith("mailto:") && {
+                  target: "_blank",
+                  rel: "noreferrer",
+                })}
                 className="text-[var(--fg)] underline decoration-[var(--gray-300)] underline-offset-4"
               >
                 {row.value}
