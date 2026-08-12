@@ -48,5 +48,32 @@
     "stack": ["Spring Boot", "AWS"],
     "links": { "github": "https://github.com/2025-UNIS-EWHA-FESTIVAL/2025-UNIS-EWHA-FESTIVAL-BACK" },
     "order": 4
+  },
+  {
+    "slug": "work-with-mandu-forever",
+    "title": "Mandu",
+    "tagline": "A transparent desktop pet: a 3D dumpling-dog that tracks your cursor and drops a dumpling in its bowl for every to-do you finish.",
+    "category": "experiments",
+    "period": { "start": "2026-08", "end": null },
+    "role": ["Solo Developer"],
+    "stack": ["Electron", "Three.js", "JavaScript"],
+    "links": {
+      "live": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER/releases/tag/v1.0.0",
+      "github": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER"
+    },
+    "order": 5
+  },
+  {
+    "slug": "discord-pr-reminder-bot",
+    "title": "ReviewPlz",
+    "tagline": "A Discord bot that reminds your team to review PRs before the deadline.",
+    "category": "experiments",
+    "period": { "start": "2026-04", "end": "2026-04" },
+    "role": ["Solo Developer"],
+    "stack": ["Node.js", "discord.js", "express 5", "node-cron"],
+    "links": {
+      "github": "https://github.com/gyesswhat/discord-pr-reminder"
+    },
+    "order": 6
   }
 ]
