@@ -62,7 +62,9 @@ dimmed.
 }
 ```
 
-`category` is `"engineering"` or `"research"` — drives the filter tabs. `links`
+`category` is `"engineering"`, `"research"`, or `"experiments"` — drives the
+filter tabs. `"experiments"` is for lightweight/casual side projects, as
+opposed to the more substantial `"engineering"`/`"research"` work. `links`
 fields are optional; omit `live`/`github` if there isn't one.
 
 Each project's long-form write-up (shown in the detail modal, separate from the

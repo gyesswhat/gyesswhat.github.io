@@ -23,7 +23,7 @@ export interface ProjectItem {
   slug: string;
   title: string;
   tagline: string;
-  category: "engineering" | "research";
+  category: "engineering" | "research" | "experiments";
   period: { start: string; end: string | null };
   role: string[];
   stack: string[];

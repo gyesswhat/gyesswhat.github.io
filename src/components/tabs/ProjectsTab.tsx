@@ -20,7 +20,7 @@ function getProjectBody(slug: string) {
   return entry ? entry[1].trim() : "";
 }
 
-const FILTERS = ["all", "engineering", "research"] as const;
+const FILTERS = ["all", "engineering", "research", "experiments"] as const;
 type Filter = (typeof FILTERS)[number];
 
 export default function ProjectsTab() {
