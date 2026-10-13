@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import projectsJson from "../../content/projects.json";
 import type { ProjectItem } from "../../content/types";
-import { formatPeriod } from "../../lib/format";
+import { formatPeriod, formatYears } from "../../lib/format";
 import Markdown from "../Markdown";
 
 const projects = projectsJson as ProjectItem[];
@@ -80,14 +80,19 @@ export default function ProjectsTab() {
                   <span className="text-base font-medium text-[var(--fg)]">
                     {item.title}
                   </span>
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--gray-300)]">
-                    {item.category}
-                  </span>
+                  {item.awards?.map((a) => (
+                    <span
+                      key={a.title}
+                      className="rounded-full border border-[var(--gray-200)] px-2 py-[2px] text-[9px] uppercase tracking-[0.12em] text-[var(--gray-400)]"
+                    >
+                      ★ {a.title}
+                    </span>
+                  ))}
                 </div>
                 <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
               </div>
               <span className="shrink-0 text-xs text-[var(--gray-300)]">
-                {formatPeriod(item.period)}
+                {formatYears(item.period)}
               </span>
             </button>
           ))}
@@ -122,7 +127,7 @@ export default function ProjectsTab() {
                 CLOSE ×
               </button>
 
-              {/* metadata — derived directly from the project JSON */}
+              {/* metadata: derived directly from the project JSON */}
               <div className="mt-4 flex flex-col gap-3 border-b border-[var(--gray-100)] pb-6">
                 <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--gray-300)]">
                   {selected.category}
@@ -150,6 +155,18 @@ export default function ProjectsTab() {
                   {selected.stack.join(" · ")}
                 </div>
 
+                {selected.awards && selected.awards.length > 0 && (
+                  <ul className="mt-1 flex flex-col gap-1.5">
+                    {selected.awards.map((a) => (
+                      <li key={a.title} className="flex items-baseline gap-2 text-xs">
+                        <span className="text-[10px] text-[var(--fg)]">★</span>
+                        <span className="font-medium text-[var(--fg)]">{a.title}</span>
+                        <span className="text-[var(--gray-400)]">{a.by}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
                 {(selected.links.live || selected.links.github) && (
                   <div className="flex gap-3 text-xs">
                     {selected.links.live && (
@@ -176,7 +193,7 @@ export default function ProjectsTab() {
                 )}
               </div>
 
-              {/* body — separate flowing markdown area, distinct from the metadata block above */}
+              {/* body: separate flowing markdown area, distinct from the metadata block above */}
               <Markdown className="flex flex-col gap-4 pt-6 text-sm leading-relaxed text-[var(--gray-600)]">
                 {getProjectBody(selected.slug)}
               </Markdown>

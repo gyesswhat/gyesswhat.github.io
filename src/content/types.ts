@@ -28,5 +28,7 @@ export interface ProjectItem {
   role: string[];
   stack: string[];
   links: { live?: string; github?: string };
+  /** short `title` shows as a tag in the list; `by` is appended in the modal */
+  awards?: { title: string; by: string }[];
   order: number;
 }
