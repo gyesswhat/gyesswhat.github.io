@@ -80,24 +80,20 @@ export default function ProjectsTab() {
                   <span className="text-base font-medium text-[var(--fg)]">
                     {item.title}
                   </span>
+                  {item.awards && item.awards.length > 0 && (
+                    <span
+                      className="text-[10px] text-[var(--gray-400)]"
+                      title={item.awards.map((a) => `${a.title} · ${a.by}`).join("\n")}
+                    >
+                      ★
+                    </span>
+                  )}
                   <span className="text-xs text-[var(--gray-300)]">
                     {formatYears(item.period)}
                   </span>
                 </div>
                 <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
               </div>
-              {item.awards && item.awards.length > 0 && (
-                <div className="flex shrink-0 flex-col items-end gap-1">
-                  {item.awards.map((a) => (
-                    <span
-                      key={a.title}
-                      className="rounded-full border border-[var(--gray-200)] px-2 py-[2px] text-[9px] uppercase tracking-[0.12em] text-[var(--gray-400)]"
-                    >
-                      ★ {a.title}
-                    </span>
-                  ))}
-                </div>
-              )}
             </button>
           ))}
         </div>
