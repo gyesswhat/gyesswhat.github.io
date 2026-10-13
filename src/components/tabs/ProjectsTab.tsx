@@ -76,11 +76,19 @@ export default function ProjectsTab() {
               className="group flex w-full items-baseline justify-between gap-4 border-b border-[var(--gray-100)] py-4 text-left transition-colors duration-200 hover:bg-[var(--gray-50)]"
             >
               <div className="flex flex-col gap-1">
-                <div className="flex items-center gap-2">
+                <div className="flex items-baseline gap-2">
                   <span className="text-base font-medium text-[var(--fg)]">
                     {item.title}
                   </span>
-                  {item.awards?.map((a) => (
+                  <span className="text-xs text-[var(--gray-300)]">
+                    {formatYears(item.period)}
+                  </span>
+                </div>
+                <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
+              </div>
+              {item.awards && item.awards.length > 0 && (
+                <div className="flex shrink-0 flex-col items-end gap-1">
+                  {item.awards.map((a) => (
                     <span
                       key={a.title}
                       className="rounded-full border border-[var(--gray-200)] px-2 py-[2px] text-[9px] uppercase tracking-[0.12em] text-[var(--gray-400)]"
@@ -89,11 +97,7 @@ export default function ProjectsTab() {
                     </span>
                   ))}
                 </div>
-                <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
-              </div>
-              <span className="shrink-0 text-xs text-[var(--gray-300)]">
-                {formatYears(item.period)}
-              </span>
+              )}
             </button>
           ))}
         </div>
