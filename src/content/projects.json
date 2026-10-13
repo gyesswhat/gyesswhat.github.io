@@ -23,6 +23,12 @@
     "links": {
       "github": "https://github.com/knewit-app"
     },
+    "awards": [
+      {
+        "title": "Selected",
+        "by": "Everyone's Startup, Round 1 (2nd cohort) 2026"
+      }
+    ],
     "order": 1
   },
   {
@@ -47,6 +53,12 @@
       "live": "https://glit.today",
       "github": "https://github.com/2026-KUSITMS-GLIT/2026-KUSITMS-GLIT-BACK"
     },
+    "awards": [
+      {
+        "title": "Excellence Award",
+        "by": "KUSITMS 33rd Meetup Project 2026"
+      }
+    ],
     "order": 2
   },
   {
@@ -93,6 +105,12 @@
     "links": {
       "github": "https://github.com/2025-UNIS-NIEDU/2025-NIEDU-BACK"
     },
+    "awards": [
+      {
+        "title": "Grand Prize",
+        "by": "UNIS Demo Day 2025"
+      }
+    ],
     "order": 4
   },
   {
