@@ -85,19 +85,9 @@ export default function ProjectsTab() {
                       aria-label="awarded"
                       className="h-3 w-3 text-[var(--gray-400)]"
                       viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                      fill="currentColor"
                     >
-                      <title>{item.awards.map((a) => `${a.title} · ${a.by}`).join("\n")}</title>
-                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
-                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
-                      <path d="M4 22h16" />
-                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
-                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
-                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+                      <path d="M5 3h14v2h3v4a4 4 0 0 1-4 4h-.4A6 6 0 0 1 13 17.9V20h3v2H8v-2h3v-2.1A6 6 0 0 1 6.4 13H6a4 4 0 0 1-4-4V5h3V3zm0 4H4v2a2 2 0 0 0 2 2V7zm14 0v4a2 2 0 0 0 2-2V7h-2z" />
                     </svg>
                   )}
                   <span className="text-xs text-[var(--gray-300)]">
