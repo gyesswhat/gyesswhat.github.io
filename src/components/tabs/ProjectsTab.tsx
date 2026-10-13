@@ -80,22 +80,22 @@ export default function ProjectsTab() {
                   <span className="text-base font-medium text-[var(--fg)]">
                     {item.title}
                   </span>
-                  {item.awards && item.awards.length > 0 && (
-                    <svg
-                      aria-label="awarded"
-                      className="h-3 w-3 text-[var(--gray-400)]"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M5 3h14v2h3v4a4 4 0 0 1-4 4h-.4A6 6 0 0 1 13 17.9V20h3v2H8v-2h3v-2.1A6 6 0 0 1 6.4 13H6a4 4 0 0 1-4-4V5h3V3zm0 4H4v2a2 2 0 0 0 2 2V7zm14 0v4a2 2 0 0 0 2-2V7h-2z" />
-                    </svg>
-                  )}
                   <span className="text-xs text-[var(--gray-300)]">
                     {formatYears(item.period)}
                   </span>
                 </div>
                 <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
               </div>
+              {item.awards && item.awards.length > 0 && (
+                <svg
+                  aria-label="awarded"
+                  className="mt-1.5 h-3 w-3 shrink-0 self-start text-[var(--gray-400)]"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M5 3h14v2h3v4a4 4 0 0 1-4 4h-.4A6 6 0 0 1 13 17.9V20h3v2H8v-2h3v-2.1A6 6 0 0 1 6.4 13H6a4 4 0 0 1-4-4V5h3V3zm0 4H4v2a2 2 0 0 0 2 2V7zm14 0v4a2 2 0 0 0 2-2V7h-2z" />
+                </svg>
+              )}
             </button>
           ))}
         </div>
