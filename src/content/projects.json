@@ -26,7 +26,7 @@
     "awards": [
       {
         "title": "Selected",
-        "by": "Everyone's Startup, Round 1 (2nd cohort) 2026"
+        "by": "Everyone's Startup Project 2026, Season 2 Round 1"
       }
     ],
     "order": 1
@@ -85,6 +85,39 @@
     "order": 3
   },
   {
+    "slug": "boldmove",
+    "title": "Boldmove",
+    "tagline": "A platform for running LG's accessibility UX tests: Excel test sheets in, in-app evaluation, statistics dashboards, Excel reports out.",
+    "category": "engineering",
+    "period": {
+      "start": "2026-02",
+      "end": "2026-04"
+    },
+    "role": [
+      "Dev Lead",
+      "Backend Lead"
+    ],
+    "stack": [
+      "Java 21",
+      "Spring Boot",
+      "PostgreSQL",
+      "Redis",
+      "Apache POI",
+      "AWS"
+    ],
+    "links": {
+      "live": "https://boldmove.site",
+      "github": "https://github.com/2026-KUSITMS-LG-B"
+    },
+    "awards": [
+      {
+        "title": "First Prize",
+        "by": "LG Electronics x KUSITMS 33rd Corporate Project 2026"
+      }
+    ],
+    "order": 4
+  },
+  {
     "slug": "niedu",
     "title": "NIEdu",
     "tagline": "A quiz app that turns daily news into bite-sized current-affairs practice.",
@@ -111,7 +144,7 @@
         "by": "UNIS Demo Day 2025"
       }
     ],
-    "order": 4
+    "order": 5
   },
   {
     "slug": "unis-ewha-festival",
@@ -132,7 +165,7 @@
     "links": {
       "github": "https://github.com/2025-UNIS-EWHA-FESTIVAL/2025-UNIS-EWHA-FESTIVAL-BACK"
     },
-    "order": 5
+    "order": 6
   },
   {
     "slug": "work-with-mandu-forever",
@@ -155,7 +188,7 @@
       "live": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER/releases/tag/v1.0.0",
       "github": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER"
     },
-    "order": 6
+    "order": 7
   },
   {
     "slug": "discord-pr-reminder-bot",
@@ -178,6 +211,6 @@
     "links": {
       "github": "https://github.com/gyesswhat/discord-pr-reminder"
     },
-    "order": 7
+    "order": 8
   }
 ]
