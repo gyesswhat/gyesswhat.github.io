@@ -7,9 +7,9 @@ an admin page, and visitors left photo reviews afterwards.
 
 I was the only backend developer next to two frontend teammates, and this was
 my first Spring Boot service deployed end to end: 6 days, 51 commits, 9 pull
-requests. The code is simple. What makes it worth keeping here is that most of
-the habits I have now started as a reaction to something that went wrong this
-week.
+requests. The code is simple. It is here because it was the first of two solo
+backends that year (Hear Here followed that autumn), and looking back at both,
+I can see where the habits I work by now came from.
 
 ## What I Built, Briefly
 

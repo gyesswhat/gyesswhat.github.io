@@ -9,8 +9,9 @@ lets signed-in users save and re-tune their mixes.
 The team had already been selected for Ewha's ORDA incubation program when I
 joined mid-way, remotely from Sweden during my exchange semester. I owned the
 backend alone next to one frontend developer: 64 commits and 15 pull requests
-over about 3 months. It is a student-sized backend and I was not at my best
-that semester, which is exactly why the lessons below stuck.
+over about 3 months. This was my second solo backend in 2024, after the
+festival booth that spring, and the two together are where most of the habits
+I work by now took shape, one project at a time.
 
 ## What I Built, Briefly
 
