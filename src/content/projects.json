@@ -176,6 +176,53 @@
     "order": 6
   },
   {
+    "slug": "hearhere",
+    "title": "Hear Here",
+    "tagline": "A generative-AI ASMR web service: describe a scene in a sentence and get background music plus matched ambient sounds to mix.",
+    "category": "engineering",
+    "period": {
+      "start": "2024-10",
+      "end": "2025-01"
+    },
+    "role": [
+      "Backend"
+    ],
+    "stack": [
+      "Spring Boot",
+      "MySQL",
+      "Redis",
+      "OpenAI API",
+      "Suno API",
+      "AWS"
+    ],
+    "links": {
+      "github": "https://github.com/gyesswhat/hearhere-back"
+    },
+    "order": 7
+  },
+  {
+    "slug": "unis-festival-2024",
+    "title": "UNIS Festival Booth",
+    "tagline": "A pre-order and pickup reservation site for UNIS's booth at the 2024 Ewha festival, with a review board.",
+    "category": "engineering",
+    "period": {
+      "start": "2024-05",
+      "end": "2024-05"
+    },
+    "role": [
+      "Backend"
+    ],
+    "stack": [
+      "Spring Boot",
+      "MySQL",
+      "AWS"
+    ],
+    "links": {
+      "github": "https://github.com/gyesswhat/2024-UNIS-Festival-Back"
+    },
+    "order": 8
+  },
+  {
     "slug": "work-with-mandu-forever",
     "title": "Mandu",
     "tagline": "A transparent desktop pet: a 3D dumpling-dog that tracks your cursor and drops a dumpling in its bowl for every to-do you finish.",
@@ -196,7 +243,7 @@
       "live": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER/releases/tag/v1.0.0",
       "github": "https://github.com/gyesswhat/WORK-WITH-MANDOO-FOREVER"
     },
-    "order": 7
+    "order": 9
   },
   {
     "slug": "discord-pr-reminder-bot",
@@ -219,6 +266,6 @@
     "links": {
       "github": "https://github.com/gyesswhat/discord-pr-reminder"
     },
-    "order": 8
+    "order": 10
   }
 ]

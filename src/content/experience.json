@@ -23,6 +23,11 @@
     {
       "title": "Lund University, Sweden",
       "description": "Spent the fall semester on exchange."
+    },
+    {
+      "title": "Ewha Startup Support Center, ORDA",
+      "description": "Joined an ORDA-selected team remotely from Sweden and built the backend of Hear Here, a generative-AI ASMR service.",
+      "project": "hearhere"
     }
   ],
   "2025": [
