@@ -29,6 +29,11 @@
     {
       "title": "UNIS, 6th — President, Backend Lead",
       "description": "Ran Ewha's startup society for a year while leading its backend track."
+    },
+    {
+      "title": "UNIS Demo Day, Grand Prize",
+      "description": "Took the grand prize with NIEdu, a daily-news quiz app, as Backend and Dev Lead.",
+      "project": "niedu"
     }
   ],
   "2026": [
@@ -39,6 +44,21 @@
     {
       "title": "SWEETS Lab @ Ewha",
       "description": "Started as an undergraduate intern in software testing research."
+    },
+    {
+      "title": "LG Electronics x KUSITMS 33rd, First Prize",
+      "description": "Won first prize in the corporate project with Boldmove, an accessibility UX test platform for LG.",
+      "project": "boldmove"
+    },
+    {
+      "title": "KUSITMS 33rd Meetup Project, Excellence Award",
+      "description": "Excellence award for GLIT, a 5-minute-a-day career journal.",
+      "project": "glit"
+    },
+    {
+      "title": "Everyone's Startup Project, Season 2 Round 1",
+      "description": "Selected with knewit, a card-payment-based place log and recommender.",
+      "project": "knewit"
     }
   ]
 }

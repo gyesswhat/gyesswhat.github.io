@@ -7,6 +7,8 @@ export interface AboutContent {
 export interface ExperienceItem {
   title: string;
   description: string;
+  /** slug of a ProjectItem; makes the title a link that opens that project */
+  project?: string;
 }
 
 export type ExperienceByYear = Record<string, ExperienceItem[]>;

@@ -23,9 +23,14 @@ function getProjectBody(slug: string) {
 const FILTERS = ["all", "engineering", "research", "experiments"] as const;
 type Filter = (typeof FILTERS)[number];
 
-export default function ProjectsTab() {
+interface ProjectsTabProps {
+  /** project to open on mount (e.g. coming from an Experience entry) */
+  initialSlug?: string | null;
+}
+
+export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
   const [filter, setFilter] = useState<Filter>("all");
-  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(initialSlug);
 
   const items = useMemo(
     () =>

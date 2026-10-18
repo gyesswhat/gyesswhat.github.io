@@ -18,6 +18,7 @@ const slideVariants = {
 
 export default function App() {
   const [tab, setTab] = useState(0);
+  const [pendingProject, setPendingProject] = useState<string | null>(null);
   const direction = useRef(1);
 
   const goTo = useCallback((next: number) => {
@@ -27,6 +28,19 @@ export default function App() {
       return clamped;
     });
   }, []);
+
+  const openProject = useCallback(
+    (slug: string) => {
+      setPendingProject(slug);
+      goTo(3);
+    },
+    [goTo]
+  );
+
+  // only the hop from Experience should auto-open a project; clear once we leave Projects
+  useEffect(() => {
+    if (tab !== 3) setPendingProject(null);
+  }, [tab]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -62,9 +76,9 @@ export default function App() {
           ) : tab === 1 ? (
             <AboutTab />
           ) : tab === 2 ? (
-            <ExperienceTab />
+            <ExperienceTab onOpenProject={openProject} />
           ) : tab === 3 ? (
-            <ProjectsTab />
+            <ProjectsTab initialSlug={pendingProject} />
           ) : (
             <ContactTab />
           )}

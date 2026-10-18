@@ -7,7 +7,11 @@ const experience = experienceJson as ExperienceByYear;
 
 const YEARS = ["2022", "2023", "2024", "2025", "2026"];
 
-export default function ExperienceTab() {
+interface ExperienceTabProps {
+  onOpenProject: (slug: string) => void;
+}
+
+export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
 
   useEffect(() => {
@@ -78,9 +82,19 @@ export default function ExperienceTab() {
                 {items.length > 0 ? (
                   items.map((item, i) => (
                     <div key={i} className="flex flex-col gap-1 text-center">
-                      <span className="text-sm font-medium text-[var(--fg)]">
-                        {item.title}
-                      </span>
+                      {item.project ? (
+                        <button
+                          type="button"
+                          onClick={() => onOpenProject(item.project!)}
+                          className="self-center text-sm font-medium text-[var(--fg)] underline decoration-[var(--gray-300)] underline-offset-4 transition-colors hover:decoration-[var(--fg)]"
+                        >
+                          {item.title} →
+                        </button>
+                      ) : (
+                        <span className="text-sm font-medium text-[var(--fg)]">
+                          {item.title}
+                        </span>
+                      )}
                       <span className="text-sm text-[var(--gray-500)]">
                         {item.description}
                       </span>
