@@ -81,7 +81,7 @@ import to wire up.
   "email": "you@example.com",
   "phone": "+82 10-0000-0000",
   "instagram": "handle",
-  "blog": "https://log.gyesswhat.dev",
+  "blog": "https://blog.gyesswhat.dev",
   "github": "username"
 }
 ```
