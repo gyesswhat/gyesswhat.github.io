@@ -43,8 +43,8 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
 
       <div className="scrollbar-none w-full overflow-x-auto">
         <div className="relative mx-auto flex h-80 w-max items-center px-32">
-          {/* line runs from the first year to just short of the rabbit (strip has px-32) */}
-          <div className="absolute left-[8.75rem] right-[9.5rem] top-1/2 h-px -translate-y-1/2 bg-[var(--gray-200)]" />
+          {/* line runs from the first year to the rabbit's feet (strip has px-32) */}
+          <div className="absolute left-[8.75rem] right-32 top-1/2 h-px -translate-y-1/2 bg-[var(--gray-200)]" />
 
           {nodes.map((node) => {
             if (node.kind === "year") {
@@ -96,11 +96,15 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
           })}
 
           {/* still running */}
-          <img
-            src="/logo.svg"
-            alt="present"
-            className="relative z-10 ml-6 h-5 w-5 -scale-x-100 animate-[hop_0.6s_ease-in-out_infinite]"
-          />
+          {/* the rabbit standing at the end of the line */}
+          <svg
+            aria-label="present"
+            viewBox="0 0 100 100"
+            className="relative z-10 ml-2 h-5 w-5 -translate-y-1.5 -scale-x-100 text-[var(--gray-300)]"
+            fill="currentColor"
+          >
+            <path d="M71.0468 71.2549H74.2952V61.3937H77.5437V54.7808H74.2952V51.5324H71.0468V48.284H64.434V45.0356H51.4403V48.284H38.2146V45.0356H44.8274V41.7872H51.4403V38.5387H54.6887V31.9259H44.8274V35.1743H38.2146V38.4227H34.9662V41.6711H31.7178V38.4227H34.9662V35.1743H38.2146V28.5615H41.463V18.7002H34.8502V21.9486H31.6018V28.5615H28.3533V38.4227H21.7405V41.6711H18.4921V44.9196H15.2437V54.7808H18.4921V58.0292H25.1049V64.6421H28.3533V67.8905H31.6018V71.1389H28.3533V74.3874H21.7405V81.0002H31.6018V77.7518H38.2146V74.5034H41.463V71.2549H51.3243V74.5034H61.1856V77.7518H51.3243V74.5034H41.463V77.7518H38.2146V81.0002H71.0468V77.7518H74.2952V74.5034H71.0468V71.2549ZM25.1049 44.9196H28.3533V48.168H25.1049V44.9196ZM28.3533 54.7808H34.9662V51.5324H38.2146V54.7808H34.9662V58.0292H28.3533V54.7808ZM48.0759 68.0065V64.7581H51.3243V61.5097H54.5727V58.2613H64.434V61.5097H67.6824V64.7581H64.434V61.5097H54.5727V64.7581H51.3243V68.0065H48.0759ZM80.9081 64.6421H84.1565V71.2549H80.9081V74.5034H74.2952V71.2549H77.5437V61.3937H80.7921V64.6421H80.9081Z" />
+          </svg>
         </div>
       </div>
     </div>
