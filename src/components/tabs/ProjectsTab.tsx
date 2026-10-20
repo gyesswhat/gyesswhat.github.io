@@ -71,8 +71,8 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
       </div>
 
       {/* a hand of cards: fanned on an arc, hover lifts one out of the stack */}
-      <div className="scrollbar-none h-[26rem] w-full overflow-x-auto overflow-y-hidden">
-        <div className="flex h-full w-max min-w-full items-end justify-center px-10 pb-12">
+      <div className="scrollbar-none h-[30rem] w-full overflow-x-auto overflow-y-hidden">
+        <div className="flex h-full w-max min-w-full items-end justify-center px-10 pb-28">
           <AnimatePresence initial={true}>
           {items.length === 0 && (
             <motion.div
