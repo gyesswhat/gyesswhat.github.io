@@ -74,7 +74,7 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
                     setPinned(pinned === node.key ? null : node.key);
                   }
                 }}
-                className="relative flex h-full w-8 cursor-pointer items-center justify-center outline-none"
+                className="relative flex h-full w-10 cursor-pointer items-center justify-center outline-none"
               >
                 {/* tick on the line; swells into a dot when active */}
                 <span
