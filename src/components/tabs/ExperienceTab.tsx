@@ -93,6 +93,12 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
               </div>
             );
           })}
+
+          {/* still running */}
+          <span className="relative z-10 ml-6 flex items-center gap-2 bg-[var(--bg)] px-3">
+            <img src="/logo.svg" alt="" className="h-5 w-5 -scale-x-100 animate-[hop_0.6s_ease-in-out_infinite]" />
+            <span className="text-xs tracking-[0.15em] text-[var(--fg)]">PRESENT</span>
+          </span>
         </div>
       </div>
     </div>
