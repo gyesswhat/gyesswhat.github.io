@@ -32,13 +32,55 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
   const [filter, setFilter] = useState<Filter>("all");
   const [selectedSlug, setSelectedSlug] = useState<string | null>(initialSlug);
 
-  const items = useMemo(
+  const baseItems = useMemo(
     () =>
       [...projects]
         .filter((item) => filter === "all" || item.category === filter)
         .sort((a, b) => a.order - b.order),
     [filter]
   );
+
+  // "pick a card, any card": flip the hand face down, shuffle, lift one and turn it over
+  const [order, setOrder] = useState<string[] | null>(null);
+  const [flipped, setFlipped] = useState(false);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  useEffect(() => {
+    setOrder(null);
+    setPicked(null);
+  }, [filter]);
+
+  // the picked card settles back into the hand once its modal closes
+  useEffect(() => {
+    if (!selectedSlug) setPicked(null);
+  }, [selectedSlug]);
+
+  const items = useMemo(() => {
+    if (!order) return baseItems;
+    return [...baseItems].sort((a, b) => order.indexOf(a.slug) - order.indexOf(b.slug));
+  }, [baseItems, order]);
+
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  const pickACard = async () => {
+    if (busy || baseItems.length === 0) return;
+    setBusy(true);
+    setPicked(null);
+    setFlipped(true);
+    await wait(600);
+    for (let n = 0; n < 3; n++) {
+      setOrder([...baseItems.map((i) => i.slug)].sort(() => Math.random() - 0.5));
+      await wait(320);
+    }
+    const chosen = baseItems[Math.floor(Math.random() * baseItems.length)];
+    setPicked(chosen.slug);
+    await wait(350);
+    setFlipped(false);
+    await wait(650);
+    setSelectedSlug(chosen.slug);
+    setBusy(false);
+  };
 
   const selected = projects.find((item) => item.slug === selectedSlug) ?? null;
 
@@ -72,7 +114,9 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
 
       {/* a hand of cards: fanned on an arc, hover lifts one out of the stack */}
       <div className="scrollbar-none relative h-[30rem] w-full overflow-x-auto overflow-y-hidden">
-        <div className="flex h-full w-max min-w-full items-end justify-center px-10 pb-28">
+        <div
+          className={`flex h-full w-max min-w-full items-end justify-center px-10 pb-28 [perspective:1200px] ${busy ? "pointer-events-none" : ""}`}
+        >
           <AnimatePresence initial={true}>
           {items.length === 0 && (
             <motion.div
@@ -82,7 +126,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
               transition={{ duration: 0.3, delay: 0.2 }}
               // absolutely centered so it does not shift while the last cards fly off
-              className="absolute bottom-28 left-1/2 flex h-72 w-52 -translate-x-1/2 flex-col justify-between border border-[var(--gray-900)] bg-[var(--gray-900)] p-5 text-[var(--gray-0)]"
+              className="absolute bottom-28 left-1/2 flex h-72 w-52 -translate-x-1/2 flex-col justify-between border border-[var(--gray-200)] bg-[var(--gray-900)] p-5 text-[var(--gray-0)]"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
                 00 · {filter}
@@ -94,9 +138,10 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
           {items.map((item, i) => {
             const mid = (items.length - 1) / 2;
             const d = i - mid;
-            const tone = i % 3; // 0 white, 1 light gray, 2 dark
+            const tone = projects.indexOf(item) % 3; // 0 white, 1 light gray, 2 dark; stable per card
             const dark = tone === 2;
             const fling = i % 2 === 0 ? -18 : 18;
+            const isPicked = picked === item.slug;
             return (
               <motion.button
                 key={item.slug}
@@ -104,45 +149,69 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
                 type="button"
                 onClick={() => setSelectedSlug(item.slug)}
                 // "nothing but a pack of cards": they drop in from above and fly off when filtered out
-                initial={{ opacity: 0, y: -360, rotate: fling }}
-                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                initial={{ opacity: 0, y: -360, rotate: fling, rotateY: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: isPicked ? -56 : 0,
+                  rotate: 0,
+                  rotateY: flipped ? 180 : 0,
+                }}
                 exit={{ opacity: 0, y: -480, rotate: fling * 2, transition: { duration: 0.35 } }}
-                transition={{ type: "spring", stiffness: 260, damping: 26, delay: i * 0.04 }}
+                transition={{ type: "spring", stiffness: 260, damping: 26, delay: busy ? 0 : i * 0.04 }}
                 style={
                   {
-                    "--r": `${d * 3}deg`,
+                    "--r": isPicked ? "0deg" : `${d * 3}deg`,
                     "--y": `${d * d * 3}px`,
+                    transformStyle: "preserve-3d",
+                    zIndex: isPicked ? 50 : undefined,
                   } as React.CSSProperties
                 }
-                className={`group relative -ml-28 flex h-72 w-52 shrink-0 origin-bottom flex-col justify-between border p-5 text-left transition-[rotate,translate,box-shadow] duration-300 ease-out first:ml-0 rotate-(--r) translate-y-(--y) hover:z-50 hover:rotate-0 hover:translate-y-[calc(var(--y)-2rem)] hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] ${
+                className={`group relative -ml-28 h-72 w-52 shrink-0 origin-bottom border border-[var(--gray-200)] text-left transition-[rotate,translate,box-shadow] duration-300 ease-out first:ml-0 rotate-(--r) translate-y-(--y) hover:z-50 hover:rotate-0 hover:translate-y-[calc(var(--y)-2rem)] hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] ${
+                  isPicked ? "shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)]" : ""
+                } ${
                   dark
-                    ? "border-[var(--gray-900)] bg-[var(--gray-900)] text-[var(--gray-0)]"
+                    ? "bg-[var(--gray-900)] text-[var(--gray-0)]"
                     : tone === 1
-                      ? "border-[var(--gray-200)] bg-[var(--gray-50)] text-[var(--fg)]"
-                      : "border-[var(--gray-200)] bg-[var(--bg)] text-[var(--fg)]"
+                      ? "bg-[var(--gray-50)] text-[var(--fg)]"
+                      : "bg-[var(--bg)] text-[var(--fg)]"
                 }`}
               >
-                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
-                  {String(i + 1).padStart(2, "0")} · {item.category}
-                </span>
-                <div className="flex flex-col gap-2">
-                  <h3 className="text-2xl font-semibold leading-tight">{item.title}</h3>
-                  <p
-                    className="line-clamp-3 text-xs leading-relaxed"
-                    style={{ color: dark ? "var(--gray-300)" : "var(--gray-500)" }}
-                  >
-                    {item.tagline}
-                  </p>
+                {/* front */}
+                <div className="flex h-full flex-col justify-between p-5 [backface-visibility:hidden]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
+                    {String(i + 1).padStart(2, "0")} · {item.category}
+                  </span>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="text-2xl font-semibold leading-tight">{item.title}</h3>
+                    <p
+                      className="line-clamp-3 text-xs leading-relaxed"
+                      style={{ color: dark ? "var(--gray-300)" : "var(--gray-500)" }}
+                    >
+                      {item.tagline}
+                    </p>
+                  </div>
+                  <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">
+                    {formatYears(item.period)}
+                  </span>
                 </div>
-                <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">
-                  {formatYears(item.period)}
-                </span>
-
+                {/* back: tiled logo rabbits inside a playing-card frame */}
+                <div className="absolute inset-0 bg-[var(--bg)] p-2 [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                  <div className="h-full w-full border border-[var(--gray-200)] bg-[url(/logo.svg)] bg-[length:22px_22px] bg-center opacity-15" />
+                </div>
               </motion.button>
             );
           })}
           </AnimatePresence>
         </div>
+
+        <button
+          type="button"
+          onClick={pickACard}
+          disabled={busy || baseItems.length === 0}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.15em] text-[var(--gray-400)] underline decoration-[var(--gray-300)] underline-offset-4 transition-colors hover:text-[var(--fg)] hover:decoration-[var(--fg)] disabled:opacity-40"
+        >
+          PICK A CARD, ANY CARD
+        </button>
       </div>
 
       <AnimatePresence>
