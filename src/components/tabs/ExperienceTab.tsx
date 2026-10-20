@@ -22,11 +22,14 @@ interface ExperienceTabProps {
 }
 
 export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
-  const [selected, setSelected] = useState<string | null>(null);
+  // hover previews a card; click pins it so it survives mouse-out (and works on touch)
+  const [pinned, setPinned] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+  const active = hovered ?? pinned;
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelected(null);
+      if (e.key === "Escape") setPinned(null);
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
@@ -55,22 +58,35 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
             }
 
             const above = itemIndex++ % 2 === 0;
-            const isSelected = selected === node.key;
+            const isActive = active === node.key;
             return (
-              <div key={node.key} className="relative flex w-12 items-center justify-center">
-                <button
-                  type="button"
-                  aria-label={node.item.title}
-                  onClick={() => setSelected(isSelected ? null : node.key)}
-                  className="group relative z-10 flex h-6 w-6 items-center justify-center"
-                >
-                  <span
-                    className="h-2 w-2 rounded-full transition-colors duration-200 group-hover:bg-[var(--gray-500)]"
-                    style={{ background: isSelected ? "var(--fg)" : "var(--gray-300)" }}
-                  />
-                </button>
+              <div
+                key={node.key}
+                role="button"
+                tabIndex={0}
+                aria-label={node.item.title}
+                onMouseEnter={() => setHovered(node.key)}
+                onMouseLeave={() => setHovered(null)}
+                onClick={() => setPinned(pinned === node.key ? null : node.key)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setPinned(pinned === node.key ? null : node.key);
+                  }
+                }}
+                className="relative flex h-full w-8 cursor-pointer items-center justify-center outline-none"
+              >
+                {/* tick on the line; swells into a dot when active */}
+                <span
+                  className="relative z-10 rounded-full transition-all duration-200"
+                  style={{
+                    width: isActive ? 8 : 1,
+                    height: isActive ? 8 : 10,
+                    background: isActive ? "var(--fg)" : "var(--gray-300)",
+                  }}
+                />
                 <AnimatePresence>
-                  {isSelected && (
+                  {isActive && (
                     <Card item={node.item} above={above} onOpenProject={onOpenProject} />
                   )}
                 </AnimatePresence>
@@ -99,7 +115,7 @@ function Card({
       exit={{ opacity: 0, y: above ? 6 : -6 }}
       transition={{ duration: 0.2, ease: [0.65, 0, 0.35, 1] }}
       className={`absolute left-1/2 z-20 flex w-56 -translate-x-1/2 flex-col items-center ${
-        above ? "bottom-1/2 mb-1" : "top-1/2 mt-1"
+        above ? "bottom-1/2 mb-2" : "top-1/2 mt-2"
       }`}
     >
       {!above && <div className="h-4 w-px bg-[var(--gray-200)]" />}
