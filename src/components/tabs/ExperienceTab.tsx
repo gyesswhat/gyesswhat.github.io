@@ -43,7 +43,8 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
 
       <div className="scrollbar-none w-full overflow-x-auto">
         <div className="relative mx-auto flex h-80 w-max items-center px-32">
-          <div className="absolute left-0 right-0 top-1/2 h-px -translate-y-1/2 bg-[var(--gray-200)]" />
+          {/* line runs from the first year to just short of the rabbit (strip has px-32) */}
+          <div className="absolute left-[8.75rem] right-[9.5rem] top-1/2 h-px -translate-y-1/2 bg-[var(--gray-200)]" />
 
           {nodes.map((node) => {
             if (node.kind === "year") {
@@ -95,10 +96,11 @@ export default function ExperienceTab({ onOpenProject }: ExperienceTabProps) {
           })}
 
           {/* still running */}
-          <span className="relative z-10 ml-6 flex items-center gap-2 bg-[var(--bg)] px-3">
-            <img src="/logo.svg" alt="" className="h-5 w-5 -scale-x-100 animate-[hop_0.6s_ease-in-out_infinite]" />
-            <span className="text-xs tracking-[0.15em] text-[var(--fg)]">PRESENT</span>
-          </span>
+          <img
+            src="/logo.svg"
+            alt="present"
+            className="relative z-10 ml-6 h-5 w-5 -scale-x-100 animate-[hop_0.6s_ease-in-out_infinite]"
+          />
         </div>
       </div>
     </div>
