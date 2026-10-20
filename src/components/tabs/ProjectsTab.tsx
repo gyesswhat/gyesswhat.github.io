@@ -52,13 +52,10 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
   }, [selected]);
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center px-6">
-      <div className="flex h-[75%] w-full max-w-lg flex-col bg-[var(--bg)] px-2 py-2">
-        <p className="pb-3 text-xs tracking-[0.15em] text-[var(--gray-400)]">
-          WHAT I'M BUILDING
-        </p>
-
-        <div className="flex items-center gap-4 pb-4 text-xs tracking-[0.15em]">
+    <div className="relative flex h-full w-full flex-col items-center justify-center gap-10 px-6">
+      <div className="flex flex-col items-center gap-3">
+        <p className="text-xs tracking-[0.15em] text-[var(--gray-400)]">WHAT I'M BUILDING</p>
+        <div className="flex items-center gap-4 text-xs tracking-[0.15em]">
           {FILTERS.map((f) => (
             <button
               key={f}
@@ -71,34 +68,56 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
             </button>
           ))}
         </div>
+      </div>
 
-        <div className="scrollbar-none flex min-h-0 flex-1 flex-col overflow-y-auto">
+      {/* a hand of cards: fanned on an arc, hover lifts one out of the stack */}
+      <div className="scrollbar-none w-full overflow-x-auto overflow-y-visible py-16">
+        <div className="flex w-max min-w-full items-end justify-center px-10">
           {items.length === 0 && (
-            <p className="py-10 text-center text-sm text-[var(--gray-400)]">
-              [ nothing here yet ]
-            </p>
+            <p className="py-10 text-sm text-[var(--gray-400)]">[ nothing here yet ]</p>
           )}
-          {items.map((item, i) => (
-            <button
-              key={item.slug}
-              type="button"
-              onClick={() => setSelectedSlug(item.slug)}
-              className="group flex w-full items-baseline gap-5 border-b border-[var(--gray-100)] py-5 text-left transition-colors duration-200 hover:bg-[var(--gray-50)]"
-            >
-              <span className="w-7 shrink-0 font-[Montserrat] text-xs tabular-nums text-[var(--gray-300)]">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <h3 className="text-xl font-semibold leading-tight text-[var(--fg)]">
-                  {item.title}
-                </h3>
-                <p className="truncate text-sm text-[var(--gray-400)]">{item.tagline}</p>
-              </div>
-              <span className="shrink-0 text-xs tabular-nums text-[var(--gray-300)]">
-                {formatYears(item.period)}
-              </span>
-            </button>
-          ))}
+          {items.map((item, i) => {
+            const mid = (items.length - 1) / 2;
+            const d = i - mid;
+            const tone = i % 3; // 0 white, 1 light gray, 2 dark
+            const dark = tone === 2;
+            return (
+              <button
+                key={item.slug}
+                type="button"
+                onClick={() => setSelectedSlug(item.slug)}
+                style={
+                  {
+                    "--r": `${d * 3}deg`,
+                    "--y": `${d * d * 3}px`,
+                  } as React.CSSProperties
+                }
+                className={`relative -ml-28 flex h-72 w-52 shrink-0 origin-bottom flex-col justify-between border p-5 text-left transition-[transform,box-shadow] duration-300 ease-out first:ml-0 rotate-(--r) translate-y-(--y) hover:z-50 hover:rotate-0 hover:translate-y-[calc(var(--y)-2rem)] hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] ${
+                  dark
+                    ? "border-[var(--gray-900)] bg-[var(--gray-900)] text-[var(--gray-0)]"
+                    : tone === 1
+                      ? "border-[var(--gray-200)] bg-[var(--gray-50)] text-[var(--fg)]"
+                      : "border-[var(--gray-200)] bg-[var(--bg)] text-[var(--fg)]"
+                }`}
+              >
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
+                  {String(i + 1).padStart(2, "0")} · {item.category}
+                </span>
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-2xl font-semibold leading-tight">{item.title}</h3>
+                  <p
+                    className="line-clamp-3 text-xs leading-relaxed"
+                    style={{ color: dark ? "var(--gray-300)" : "var(--gray-500)" }}
+                  >
+                    {item.tagline}
+                  </p>
+                </div>
+                <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">
+                  {formatYears(item.period)}
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
 
