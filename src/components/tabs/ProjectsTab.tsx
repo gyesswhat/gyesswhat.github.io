@@ -71,7 +71,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
       </div>
 
       {/* a hand of cards: fanned on an arc, hover lifts one out of the stack */}
-      <div className="scrollbar-none h-[30rem] w-full overflow-x-auto overflow-y-hidden">
+      <div className="scrollbar-none relative h-[30rem] w-full overflow-x-auto overflow-y-hidden">
         <div className="flex h-full w-max min-w-full items-end justify-center px-10 pb-28">
           <AnimatePresence initial={true}>
           {items.length === 0 && (
@@ -81,7 +81,8 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.2 } }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              className="flex h-72 w-52 shrink-0 flex-col justify-between border border-[var(--gray-900)] bg-[var(--gray-900)] p-5 text-[var(--gray-0)]"
+              // absolutely centered so it does not shift while the last cards fly off
+              className="absolute bottom-28 left-1/2 flex h-72 w-52 -translate-x-1/2 flex-col justify-between border border-[var(--gray-900)] bg-[var(--gray-900)] p-5 text-[var(--gray-0)]"
             >
               <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
                 00 · {filter}
