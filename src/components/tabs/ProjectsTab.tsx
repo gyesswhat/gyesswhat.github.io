@@ -68,9 +68,6 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
               style={{ color: filter === f ? "var(--fg)" : "var(--gray-300)" }}
             >
               {f.toUpperCase()}
-              <span className="ml-1 text-[10px] text-[var(--gray-300)]">
-                {f === "all" ? projects.length : projects.filter((p) => p.category === f).length}
-              </span>
             </button>
           ))}
         </div>
