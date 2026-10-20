@@ -77,17 +77,17 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
           {items.length === 0 && (
             <motion.div
               key="empty"
-              initial={{ opacity: 0, y: -360 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -480, transition: { duration: 0.35 } }}
-              transition={{ type: "spring", stiffness: 260, damping: 26 }}
-              className="flex h-72 w-52 shrink-0 flex-col justify-between border border-dashed border-[var(--gray-300)] p-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="flex h-72 w-52 shrink-0 flex-col justify-between border border-[var(--gray-900)] bg-[var(--gray-900)] p-5 text-[var(--gray-0)]"
             >
-              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-300)]">
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-400)]">
                 00 · {filter}
               </span>
-              <p className="text-sm text-[var(--gray-400)]">[ nothing here yet ]</p>
-              <span className="text-[10px] tracking-[0.1em] text-[var(--gray-300)]">soon</span>
+              <h3 className="text-2xl font-semibold leading-tight">still working on!</h3>
+              <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">soon</span>
             </motion.div>
           )}
           {items.map((item, i) => {
