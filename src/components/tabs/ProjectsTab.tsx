@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import projectsJson from "../../content/projects.json";
 import type { ProjectItem } from "../../content/types";
@@ -63,6 +63,21 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
 
   const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
+  const shuffle = (slugs: string[]) => {
+    const a = [...slugs];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  // draw from a shuffled deck so every card comes up once before any repeats
+  const deck = useRef<string[]>([]);
+  useEffect(() => {
+    deck.current = [];
+  }, [filter]);
+
   const pickACard = async () => {
     if (busy || baseItems.length === 0) return;
     setBusy(true);
@@ -70,10 +85,12 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
     setFlipped(true);
     await wait(600);
     for (let n = 0; n < 3; n++) {
-      setOrder([...baseItems.map((i) => i.slug)].sort(() => Math.random() - 0.5));
+      setOrder(shuffle(baseItems.map((i) => i.slug)));
       await wait(320);
     }
-    const chosen = baseItems[Math.floor(Math.random() * baseItems.length)];
+    if (deck.current.length === 0) deck.current = shuffle(baseItems.map((i) => i.slug));
+    const drawn = deck.current.pop();
+    const chosen = baseItems.find((i) => i.slug === drawn) ?? baseItems[0];
     setPicked(chosen.slug);
     await wait(350);
     setFlipped(false);
@@ -208,7 +225,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
           type="button"
           onClick={pickACard}
           disabled={busy || baseItems.length === 0}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs tracking-[0.15em] text-[var(--gray-400)] underline decoration-[var(--gray-300)] underline-offset-4 transition-colors hover:text-[var(--fg)] hover:decoration-[var(--fg)] disabled:opacity-40"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 border border-[var(--fg)] bg-[var(--bg)] px-5 py-2 text-xs tracking-[0.15em] text-[var(--fg)] transition-colors duration-200 hover:bg-[var(--fg)] hover:text-[var(--bg)] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-[var(--bg)] disabled:hover:text-[var(--fg)]"
         >
           PICK A CARD, ANY CARD
         </button>
@@ -273,7 +290,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
                 {selected.awards && selected.awards.length > 0 && (
                   <ul className="mt-1 flex flex-col gap-1.5">
                     {selected.awards.map((a) => (
-                      <li key={a.title} className="flex items-baseline gap-2 text-xs">
+                      <li key={`${a.title}-${a.by}`} className="flex items-baseline gap-2 text-xs">
                         <span className="text-[10px] text-[var(--fg)]">★</span>
                         <span className="font-medium text-[var(--fg)]">{a.title}</span>
                         <span className="text-[var(--gray-400)]">{a.by}</span>
