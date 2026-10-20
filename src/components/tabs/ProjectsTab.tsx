@@ -78,24 +78,25 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
               [ nothing here yet ]
             </p>
           )}
-          {items.map((item) => (
+          {items.map((item, i) => (
             <button
               key={item.slug}
               type="button"
               onClick={() => setSelectedSlug(item.slug)}
-              className="group flex w-full items-baseline justify-between gap-4 border-b border-[var(--gray-100)] py-4 text-left transition-colors duration-200 hover:bg-[var(--gray-50)]"
+              className="group flex w-full items-baseline gap-5 border-b border-[var(--gray-100)] py-5 text-left transition-colors duration-200 hover:bg-[var(--gray-50)]"
             >
-              <div className="flex flex-col gap-1">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-base font-medium text-[var(--fg)]">
-                    {item.title}
-                  </span>
-                  <span className="text-xs text-[var(--gray-300)]">
-                    {formatYears(item.period)}
-                  </span>
-                </div>
-                <p className="text-sm text-[var(--gray-500)]">{item.tagline}</p>
+              <span className="w-7 shrink-0 font-[Montserrat] text-xs tabular-nums text-[var(--gray-300)]">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="flex min-w-0 flex-1 flex-col gap-1">
+                <h3 className="text-xl font-semibold leading-tight text-[var(--fg)]">
+                  {item.title}
+                </h3>
+                <p className="truncate text-sm text-[var(--gray-400)]">{item.tagline}</p>
               </div>
+              <span className="shrink-0 text-xs tabular-nums text-[var(--gray-300)]">
+                {formatYears(item.period)}
+              </span>
             </button>
           ))}
         </div>
