@@ -76,23 +76,31 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
           {items.length === 0 && (
             <p className="py-10 text-sm text-[var(--gray-400)]">[ nothing here yet ]</p>
           )}
+          <AnimatePresence initial={true}>
           {items.map((item, i) => {
             const mid = (items.length - 1) / 2;
             const d = i - mid;
             const tone = i % 3; // 0 white, 1 light gray, 2 dark
             const dark = tone === 2;
+            const fling = i % 2 === 0 ? -18 : 18;
             return (
-              <button
+              <motion.button
                 key={item.slug}
+                layout
                 type="button"
                 onClick={() => setSelectedSlug(item.slug)}
+                // "nothing but a pack of cards": they drop in from above and fly off when filtered out
+                initial={{ opacity: 0, y: -360, rotate: fling }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                exit={{ opacity: 0, y: -480, rotate: fling * 2, transition: { duration: 0.35 } }}
+                transition={{ type: "spring", stiffness: 260, damping: 26, delay: i * 0.04 }}
                 style={
                   {
                     "--r": `${d * 3}deg`,
                     "--y": `${d * d * 3}px`,
                   } as React.CSSProperties
                 }
-                className={`relative -ml-28 flex h-72 w-52 shrink-0 origin-bottom flex-col justify-between border p-5 text-left transition-[transform,box-shadow] duration-300 ease-out first:ml-0 rotate-(--r) translate-y-(--y) hover:z-50 hover:rotate-0 hover:translate-y-[calc(var(--y)-2rem)] hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] ${
+                className={`group relative -ml-28 flex h-72 w-52 shrink-0 origin-bottom flex-col justify-between border p-5 text-left transition-[rotate,translate,box-shadow] duration-300 ease-out first:ml-0 rotate-(--r) translate-y-(--y) hover:z-50 hover:rotate-0 hover:translate-y-[calc(var(--y)-2rem)] hover:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.35)] ${
                   dark
                     ? "border-[var(--gray-900)] bg-[var(--gray-900)] text-[var(--gray-0)]"
                     : tone === 1
@@ -115,9 +123,21 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
                 <span className="text-[10px] tracking-[0.1em] text-[var(--gray-400)]">
                   {formatYears(item.period)}
                 </span>
-              </button>
+
+                {/* "DRINK ME" style paper tag, shows on hover */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-8 right-4 flex flex-col items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                >
+                  <span className="h-3 w-px bg-[var(--gray-400)]" />
+                  <span className="-rotate-6 border border-[var(--gray-900)] bg-[var(--bg)] px-2 py-0.5 font-mono text-[9px] tracking-[0.2em] text-[var(--fg)]">
+                    READ ME
+                  </span>
+                </span>
+              </motion.button>
             );
           })}
+          </AnimatePresence>
         </div>
       </div>
 
