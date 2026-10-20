@@ -71,12 +71,25 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
       </div>
 
       {/* a hand of cards: fanned on an arc, hover lifts one out of the stack */}
-      <div className="scrollbar-none w-full overflow-x-auto overflow-y-visible py-16">
-        <div className="flex w-max min-w-full items-end justify-center px-10">
-          {items.length === 0 && (
-            <p className="py-10 text-sm text-[var(--gray-400)]">[ nothing here yet ]</p>
-          )}
+      <div className="scrollbar-none h-[26rem] w-full overflow-x-auto overflow-y-hidden">
+        <div className="flex h-full w-max min-w-full items-end justify-center px-10 pb-12">
           <AnimatePresence initial={true}>
+          {items.length === 0 && (
+            <motion.div
+              key="empty"
+              initial={{ opacity: 0, y: -360 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -480, transition: { duration: 0.35 } }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              className="flex h-72 w-52 shrink-0 flex-col justify-between border border-dashed border-[var(--gray-300)] p-5"
+            >
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--gray-300)]">
+                00 · {filter}
+              </span>
+              <p className="text-sm text-[var(--gray-400)]">[ nothing here yet ]</p>
+              <span className="text-[10px] tracking-[0.1em] text-[var(--gray-300)]">soon</span>
+            </motion.div>
+          )}
           {items.map((item, i) => {
             const mid = (items.length - 1) / 2;
             const d = i - mid;
@@ -124,16 +137,6 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
                   {formatYears(item.period)}
                 </span>
 
-                {/* "DRINK ME" style paper tag, shows on hover */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -top-8 right-4 flex flex-col items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                >
-                  <span className="h-3 w-px bg-[var(--gray-400)]" />
-                  <span className="-rotate-6 border border-[var(--gray-900)] bg-[var(--bg)] px-2 py-0.5 font-mono text-[9px] tracking-[0.2em] text-[var(--fg)]">
-                    READ ME
-                  </span>
-                </span>
               </motion.button>
             );
           })}
@@ -150,7 +153,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={() => setSelectedSlug(null)}
-            className="absolute inset-0 flex items-center justify-center bg-black/10 px-6"
+            className="absolute inset-0 z-[60] flex items-center justify-center bg-black/10 px-6"
           >
             <motion.div
               key="modal"
