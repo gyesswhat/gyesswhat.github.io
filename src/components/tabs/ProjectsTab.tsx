@@ -53,7 +53,7 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
 
   return (
     <div className="relative flex h-full w-full items-center justify-center px-6">
-      <div className="flex max-h-[75%] w-full max-w-lg flex-col overflow-y-auto bg-[var(--bg)] px-2 py-2">
+      <div className="flex h-[75%] w-full max-w-lg flex-col bg-[var(--bg)] px-2 py-2">
         <p className="pb-3 text-xs tracking-[0.15em] text-[var(--gray-400)]">
           WHAT I'M BUILDING
         </p>
@@ -68,11 +68,19 @@ export default function ProjectsTab({ initialSlug = null }: ProjectsTabProps) {
               style={{ color: filter === f ? "var(--fg)" : "var(--gray-300)" }}
             >
               {f.toUpperCase()}
+              <span className="ml-1 text-[10px] text-[var(--gray-300)]">
+                {f === "all" ? projects.length : projects.filter((p) => p.category === f).length}
+              </span>
             </button>
           ))}
         </div>
 
-        <div className="flex flex-col">
+        <div className="scrollbar-none flex min-h-0 flex-1 flex-col overflow-y-auto">
+          {items.length === 0 && (
+            <p className="py-10 text-center text-sm text-[var(--gray-400)]">
+              [ nothing here yet ]
+            </p>
+          )}
           {items.map((item) => (
             <button
               key={item.slug}
